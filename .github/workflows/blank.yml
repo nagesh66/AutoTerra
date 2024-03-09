@@ -1,0 +1,47 @@
+name: 'Terraform CI'
+
+on:
+  push:
+    branches:
+    - 'feature/**'
+    - main
+  pull_request:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Set Google Cloud credentials
+      uses: 'google-github-actions/auth@v2'
+      with:
+        service_account: 'auto-terra@nagesh-sandbox.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
+        workload_identity_provider: 'projects/1081352067477/locations/global/workloadIdentityPools/66deg-auto-wip/providers/jit-access' # "projects/123456789/locations/global/workloadIdentityPools/WIF_POOL/providers/WIF_PROVIDER"
+     
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt -check
+
+    - name: Terraform Plan
+      run: terraform plan 
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve
