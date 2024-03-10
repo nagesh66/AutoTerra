@@ -29,8 +29,10 @@ jobs:
     - name: Set Google Cloud credentials
       uses: 'google-github-actions/auth@v2'
       with:
-        service_account: 'auto-terra@nagesh-sandbox.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
-        workload_identity_provider: 'projects/1081352067477/locations/global/workloadIdentityPools/66deg-auto-wip/providers/jit-access' # "projects/123456789/locations/global/workloadIdentityPools/WIF_POOL/providers/WIF_PROVIDER"
+        service_account: ${{ secrets.SERVICE_ACCOUNT }} 
+#'auto-terra@nagesh-sandbox.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+#'projects/1081352067477/locations/global/workloadIdentityPools/66deg-auto-wip/providers/jit-access' # "projects/123456789/locations/global/workloadIdentityPools/WIF_POOL/providers/WIF_PROVIDER"
      
 
     - name: Terraform Init
