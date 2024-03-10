@@ -3,3 +3,20 @@ resource "google_storage_bucket" "auto-expire" {
   location      = "US"
   force_destroy = true
 }
+
+
+
+resource "google_compute_instance" "my_instance" {
+  name         = "my-instance"
+  machine_type = "n1-standard-1"
+  project      = "nagesh-sandbox"
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-10"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
