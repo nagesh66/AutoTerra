@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "auto-expire" {
-  name          = "no-public-access-bucket-22324242g"
+  name          = "no-public-access-bucket-22324ss242g"
   location      = "US"
   force_destroy = true
 }
