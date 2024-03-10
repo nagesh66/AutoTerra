@@ -1,9 +1,9 @@
 export ORGANIZATION_ID=694849223307
 export PROJECT_ID=nagesh-sandbox
 export PROJECT_NUMBER=1081352067477
-export REGION= us-central1-a
-export SERVICE_ACCOUNT_NAME= auto-terra
-export BUCKET_NAME= auto-tera-state1232311
+export REGION=us-central1
+export SERVICE_ACCOUNT_NAME=auto-terra
+export BUCKET_NAME=auto-tera-state1232311
 
 # Create Bucket to store terraform state backend files.
 gcloud storage buckets create gs://$BUCKET_NAME --location=$REGION
@@ -13,9 +13,9 @@ gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME \
   --description="This is for Just-In-Time Access" \
   --display-name="auto-terra"
 
-# gcloud organizations add-iam-policy-binding $ORGANIZATION_ID \
-#   --member="serviceAccount:$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
-#   --role="roles/iam.securityAdmin"
+ gcloud organizations add-iam-policy-binding $ORGANIZATION_ID \
+   --member="serviceAccount:$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
+   --role="roles/iam.securityAdmin"
 
 gcloud organizations add-iam-policy-binding $ORGANIZATION_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
@@ -45,4 +45,7 @@ gcloud iam workload-identity-pools providers create-oidc "jit-access" \
 gcloud iam service-accounts add-iam-policy-binding "$SERVICE_ACCOUNT_NAME@${PROJECT_ID}.iam.gserviceaccount.com" \
   --project="${PROJECT_ID}" \
   --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/66deg-auto-wip/attribute.repository/66degrees/AutoTerra"
+  --member="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/66deg-auto-wip/attribute.repository/nagesh66/AutoTerra"
+ gcloud organizations add-iam-policy-binding $ORGANIZATION_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/storage.objectUser"
