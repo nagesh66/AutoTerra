@@ -7,7 +7,7 @@ resource "google_storage_bucket" "auto-expire" {
 
 
 resource "google_compute_instance" "my_instance" {
-  name         = "my-instance"
+  name         = "my-instance1"
   machine_type = "n1-standard-1"
   project      = "nagesh-sandbox"
   zone         = "us-central1-a"
