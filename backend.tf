@@ -1,6 +1,7 @@
 terraform {
   required_version = ">= 1.2.0"
   backend "gcs" {
-    bucket = "auto-tera-state1232311"
+    bucket = "sachinsoni-sb-bucket-test-poc"
   }
 }
+#auto-tera-state1232311
