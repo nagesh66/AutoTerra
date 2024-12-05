@@ -1,20 +1,17 @@
 #!/bin/bash
 
-
 # Variables
-TOKEN=$GITHUB_TOKEN  # Replace with your actual token value
-OWNER="nagesh66"  # Replace with your GitHub username or organization
-REPO="AutoTerra"  # Replace with your repository name
+TOKEN=$GITHUB_TOKEN  # Use the GitHub token from environment variables
+OWNER="nagesh66"  # Your GitHub username or organization
+REPO="AutoTerra"  # Repository name
 FILE_PATH="demo.txt"  # Path to the file to delete
 BRANCH="main"  # Branch to delete the file from
-
 
 # Fetch the file's SHA
 get_file_sha() {
     echo "Fetching SHA for $FILE_PATH..."
     RESPONSE=$(curl -s -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$OWNER/$REPO/contents/$FILE_PATH?ref=$BRANCH")
-
 
     SHA=$(echo "$RESPONSE" | jq -r '.sha')
     if [[ "$SHA" == "null" ]]; then
@@ -24,7 +21,6 @@ get_file_sha() {
     echo "SHA for $FILE_PATH: $SHA"
 }
 
-
 # Delete the file
 delete_file() {
     echo "Deleting $FILE_PATH from branch $BRANCH..."
@@ -32,7 +28,6 @@ delete_file() {
         -H "Content-Type: application/json" \
         -d "{\"message\": \"Delete $FILE_PATH\", \"sha\": \"$SHA\", \"branch\": \"$BRANCH\"}" \
         "https://api.github.com/repos/$OWNER/$REPO/contents/$FILE_PATH")
-
 
     if [[ "$(echo "$RESPONSE" | jq -r '.commit.sha')" != "null" ]]; then
         echo "File $FILE_PATH successfully deleted."
@@ -42,6 +37,11 @@ delete_file() {
     fi
 }
 
+# Main execution
+main() {
+    get_file_sha
+    delete_file
+}
 
-# Main Execution
-main()
+# Run the script
+main
