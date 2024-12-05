@@ -37,7 +37,7 @@ jobs:
         chmod +x delete_file.sh
         ./delete_file.sh
       env:
-        TOKEN: ${{ secrets.TEST_DELETE }} 
+        GITHUB_TOKEN: ${{ secrets.TEST_DELETE }}
     
     - name: Terraform Init
       run: terraform init
