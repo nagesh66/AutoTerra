@@ -32,7 +32,12 @@ jobs:
         service_account: 'auto-terra@nagesh-sandbox.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
         workload_identity_provider: 'projects/1081352067477/locations/global/workloadIdentityPools/66deg-auto-wip/providers/jit-access' # "projects/123456789/locations/global/workloadIdentityPools/WIF_POOL/providers/WIF_PROVIDER"
      
-
+    - name: Delete a file from the repository
+      run: |
+        chmod +x delete_file.sh
+        ./delete_file.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.TEST_DELETE }}
     - name: Terraform Init
       run: terraform init
 
