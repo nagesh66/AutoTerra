@@ -6,8 +6,7 @@ on:
     - 'feature/**'
     - main
   
-    paths:
-      - 'sandbox-vending/data/**'  # Trigger when files are added or modified in this directory
+ # Trigger when files are added or modified in this directory
     paths-ignore:
       - '**/*'  # Ignore all deletions (any deletions in the entire repo)
 
