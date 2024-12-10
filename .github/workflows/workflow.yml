@@ -5,10 +5,7 @@ on:
     branches:
     - 'feature/**'
     - main
-  
- # Trigger when files are added or modified in this directory
-    paths-ignore:
-      - '**/*'  # Ignore all deletions (any deletions in the entire repo)
+
 
 jobs:
   terraform:
