@@ -5,7 +5,7 @@ TOKEN=$GITHUB_TOKEN  # GitHub token from environment variables
 OWNER="nagesh66"     # GitHub username or organization
 REPO="AutoTerra"     # Repository name
 BRANCH="main"        # Branch to delete the file from
-GITHUB_DIRECTORIES=("sandbox-vending/data")
+GITHUB_DIRECTORIES=("sandbox-vending/data" "gp-vending/data")
 
 # Fetch disabled projects
 fetch_disabled_projects() {
